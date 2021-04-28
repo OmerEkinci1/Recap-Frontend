@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cars',
@@ -15,8 +16,10 @@ export class CarsComponent implements OnInit {
   dataLoaded = false;
   filterText ="";
 
-  constructor(private carService:CarService, private activatedRoute: ActivatedRoute, 
-    private toastrService:ToastrService) { }
+  constructor(private carService:CarService, 
+    private activatedRoute: ActivatedRoute, 
+    private toastrService:ToastrService,
+    private cartService:CartService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -47,6 +50,7 @@ export class CarsComponent implements OnInit {
       this.toastrService.error("Error","This car cannot add to chart");
     }else {
       this.toastrService.success("Added to chart", car.carName);
+      this.cartService.addToChart(car);
     }
   }
 }

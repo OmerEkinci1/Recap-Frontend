@@ -1,7 +1,17 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
 </div>
-<table *ngIf="dataLoaded!=true" class="table">
+
+<div class="mb-3">
+    <label for="filterText" class="form-label">Search Car</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" 
+    placeholder="Enter search expression">
+</div>
+<div *ngIf="filterText.length>2" class="alert alert-success">
+    {{filterText}} aradınız.
+</div>
+
+<table *ngIf="dataLoaded!=false" class="table">
     <thead>
         <tr>
             <th>Id</th>
@@ -9,13 +19,19 @@
             <th>Car Name</th>
             <th>Model Year</th>
             <th>Daily Price</th>
+            <th>Daily Price with Tax</th>
+            <th></th>
         </tr>
     </thead>
-    <tr *ngFor="let car of cars">
-        <td>{{ car.carId }}</td>
-        <td>{{ car.brandId }}</td>
-        <td>{{ car.carName }}</td>
-        <td>{{ car.modelYear }}</td>
-        <td>{{ car.dailyPrice }}</td>
-    </tr>
+    <tbody>
+        <tr *ngFor="let car of cars | filterPipe:filterText">
+            <td>{{ car.carId }}</td>
+            <td>{{ car.brandId }}</td>
+            <td>{{ car.carName | uppercase }}</td>
+            <td>{{ car.modelYear }}</td>
+            <td>{{ car.dailyPrice | currency }}</td>
+            <td>{{ car.dailyPrice | vatAdded:18 | currency }}</td>
+            <td><button (click)="addToChart(car)" class="btn btn-success">Add to chart</button></td>
+        </tr>
+    </tbody>
 </table>

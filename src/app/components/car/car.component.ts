@@ -45,12 +45,12 @@ export class CarsComponent implements OnInit {
     })
   }
 
-  addToChart(car:Car){
+  addToCart(car:Car){
     if (car.carId === 1){
-      this.toastrService.error("Error","This car cannot add to chart");
+      this.toastrService.error("Error","This car cannot add to cart");
     }else {
-      this.toastrService.success("Added to chart", car.carName);
-      this.cartService.addToChart(car);
+      this.toastrService.success("Added to cart", car.carName);
+      this.cartService.addToCart(car);
     }
   }
 }

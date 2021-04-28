@@ -6,7 +6,7 @@
       <li *ngFor="let cartItem of cartItems"><a 
         class="dropdown-item">
         <span class="badge bg-secondary">{{cartItem.quantity}} </span>{{cartItem.car.carName}}
-        <span (click) = "removeFromChart(cartItem.car)" class="badge bg-secondary"> Sil</span></a></li>
+        <span (click) = "removeFromCart(cartItem.car)" class="badge bg-secondary"> Sil</span></a></li>
       <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item">Go to Chart</a></li>
     </ul>

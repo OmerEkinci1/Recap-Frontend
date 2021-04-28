@@ -16,16 +16,16 @@ export class CartSummaryComponent implements OnInit {
     private toastrService:ToastrService) { }
 
   ngOnInit(): void {
-    this.getChart();
+    this.getCart();
   }
 
-  getChart(){
+  getCart(){
     this.cartItems = this.cartService.list();
   }
 
-  removeFromChart(car:Car){
+  removeFromCart(car:Car){
     this.cartService.removeFromCart(car);
-    this.toastrService.error("Deleted", car.carName+"from the chart.");
+    this.toastrService.error("Deleted", car.carName+"from the cart.");
   }
 
 }

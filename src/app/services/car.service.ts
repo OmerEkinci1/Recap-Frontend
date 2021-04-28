@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Car } from '../models/car';
 import { ListResponseModel } from '../models/listResponseModel';
+import { ResponseModel } from '../models/responseModel';
 
 // injectable notasyonu gördüğümüzde bunun service olduğunu anlıyoruz.
 @Injectable({
@@ -22,5 +23,9 @@ export class CarService {
   getCarsByBrand(brandId:number): Observable<ListResponseModel<Car>> {
     let newPath = this.apiUrl + "products/getbybrand?brandId="+brandId;
     return this.httpClient.get<ListResponseModel<Car>>(this.apiUrl);
+  }
+
+  add(car:Car):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/add",car);
   }
 }
